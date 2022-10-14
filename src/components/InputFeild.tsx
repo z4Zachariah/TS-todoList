@@ -1,6 +1,12 @@
 import React, {useRef} from 'react'
 import "./styles.css";
 
+/*
+This is the input field at the top of the app - 
+takes in a string a creates a todo object on submission
+*/
+
+//Props interface to defne props types in TS
 interface Props  {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
@@ -8,6 +14,8 @@ interface Props  {
 
 }
 
+
+//component
 const Inputfeild: React.FC<Props> = ({todo,setTodo,handleAdd}:Props) => {
 const inputref = useRef<HTMLInputElement>(null);
 
@@ -31,6 +39,6 @@ const inputref = useRef<HTMLInputElement>(null);
       
     </form>
   )
-}
+}//component ends
 
 export default Inputfeild;

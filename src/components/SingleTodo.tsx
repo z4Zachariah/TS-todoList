@@ -6,8 +6,14 @@ import './styles.css';
 import TodoList from './TodoList';
 import {Draggable} from 'react-beautiful-dnd';
 
+/*
+Single todo component shapes the component that each 
+todo object will be mapped to
+includes crud buttons using react-icons
+*/
 
 
+//Props type to defne props types in TS
 type Props = {
     todo: Todo;
     todos: Todo[];
@@ -16,13 +22,14 @@ type Props = {
 
 }
 
+//component
 const SingleTodo:React.FC<Props> = ({todo,todos,setTodos,index}) => {
 
-
+    //edit states - if editing is being done, and update the edited todo
     const [edit, setedit] = useState<boolean>(false);
-
     const [edittodo, setEditTodo] = useState<string>(todo.todo);
 
+    //input reference
     const inputRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
       inputRef.current?.focus();
@@ -30,16 +37,18 @@ const SingleTodo:React.FC<Props> = ({todo,todos,setTodos,index}) => {
 
 
 
-
+    //handle clicking the 'tick' - todo is done/undone - sets isDone, which controls the strikethrough effect
     const handleDone = (id: number) =>{
         setTodos(todos.map((todo)=>todo.id == id?{...todo, isDone:!todo.isDone} : todo))
     };
 
+    //handle deleting a todo from the state - filter todo from the todos array
     const handleDelete = (id: number) =>{
         setTodos(todos.filter((todo)=>todo.id !== id ));
 
     };
 
+    //handle editing the todo - update the todos with the edited todo
     const handleEdit = (e:React.FormEvent, id: number) => {
         e.preventDefault();
         setTodos(
@@ -47,7 +56,7 @@ const SingleTodo:React.FC<Props> = ({todo,todos,setTodos,index}) => {
           );
           setedit(false);
 
-    }
+    };
 
 
 
@@ -55,17 +64,17 @@ const SingleTodo:React.FC<Props> = ({todo,todos,setTodos,index}) => {
 
     <Draggable draggableId={todo.id.toString()} index={index}>
         {
-            (provided, snapshot) => (
+        (provided, snapshot) => (
 
-<form 
-className={`todos_single ${snapshot.isDragging ? "drag" : ""}`}
-    onSubmit={(e) => handleEdit(e, todo.id)}
-    {...provided.draggableProps}
-    {...provided.dragHandleProps}
-    ref={provided.innerRef}>
+        <form 
+            className={`todos_single ${snapshot.isDragging ? "drag" : ""}`}
+            onSubmit={(e) => handleEdit(e, todo.id)}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}>
 
     {
-        edit ? (
+            edit ? (
             <input value={edittodo}
              onChange={(e) => setEditTodo(e.target.value)}
              className="todos_single--text"
@@ -77,38 +86,29 @@ className={`todos_single ${snapshot.isDragging ? "drag" : ""}`}
         )
     }
 
+            <div>
+                <span className="icon">
+                    <AiFillEdit onClick={()=>{
+                        if (!edit && !todo.isDone){
+                            setedit(!edit)}
+                    }}/>
+                </span>
 
+                <span className="icon">
+                <AiFillDelete onClick={()=>handleDelete(todo.id)}/>
+                </span>
 
-        
-
-        <div>
-            <span className="icon">
-                <AiFillEdit onClick={()=>{
-                    if (!edit && !todo.isDone){
-                        setedit(!edit)
-                    }
-                }}/>
-            </span>
-
-            <span className="icon">
-            <AiFillDelete onClick={()=>handleDelete(todo.id)}/>
-
-            </span>
-
-            <span className="icon">
-
-                <MdDone onClick={()=>handleDone(todo.id)}/>
-
-            </span>
-        </div>
+                <span className="icon">
+                    <MdDone onClick={()=>handleDone(todo.id)}/>
+                </span>
+            </div>
       
-    </form>
-            )
-        }
+        </form>
+    )}
 
     </Draggable>
     
   )
-}
+}//end Component
 
 export default SingleTodo
