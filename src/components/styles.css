@@ -3,16 +3,19 @@
     width: 95%;
     position: relative;
     align-items: center;
+   
+
 }
 
 .inputbox{
     width: 100%;
     border-radius: 50px;
+    box-sizing: border-box;
     padding: 20px 30px;
     font-size: 25px;
-    border: none;
+    border: 2px solid black;
     transition: 0.2s;
-    box-shadow: inset 0 0 5 black;
+    box-shadow: inset 10 10 10 black;
 }
 
 .inputbox:focus{
@@ -27,16 +30,16 @@
     height: 50px;
     margin: 12px;
     border-radius: 50px;
-    border: none;
+    border: 2px solid black;
+    border-color: black;
     font-size: 15px;
-    background-color:  rgb(0, 73, 146);
-    color: white;
+    background-color: white;
+    color: black;
     transition: 0.2s all;
-    box-shadow: 0 0 10px black;
 }
 
 .inputsubmit:hover{
-    background-color:  rgb(4, 104, 203);
+    background-color:  rgb(206, 206, 206);
 
 }
 
@@ -61,7 +64,9 @@
     padding: 20px;
     margin-top: 15px;
     transition: 0.2s;
-    background-image: url("https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg");
+    border: 2px solid black;
+    background-color: white;
+
 }
 
 .todos_single:hover{

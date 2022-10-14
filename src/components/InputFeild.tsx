@@ -25,7 +25,8 @@ const inputref = useRef<HTMLInputElement>(null);
       onChange={
         (e)=>setTodo(e.target.value)
       }
-       placeholder='enter a task' className='inputbox'/>
+       placeholder='enter a task'
+        className='inputbox'/>
       <button type='submit' className="inputsubmit">Go</button>
       
     </form>
